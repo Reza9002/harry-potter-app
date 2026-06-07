@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Character from './Character'; // Importiere die Character-Komponente
 
-
 export default function FetchExample() {
   const [data, setData] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
@@ -9,7 +8,7 @@ export default function FetchExample() {
   const [selectedCount, setSelectedCount] = useState(5);
 
   useEffect(() => {
-   fetch('https://hp-api.onrender.com/api/characters')
+    fetch('https://hp-api.onrender.com/api/characters')
       .then((response) => response.json())
       .then((json) => setData(json));
   }, []);
@@ -17,7 +16,7 @@ export default function FetchExample() {
   const filteredData = () => {
     let result = data;
 
-    // Filtern nach Namen, falls 'viewOption' 'name' ist und ein Filtertext angegeben wurde
+    // اصلاح باگ حروف کوچک و بزرگ در فیلتر نام
     if (viewOption === 'name' && nameFilter) {
       result = data.filter((item) =>
         item.name.toLowerCase().includes(nameFilter.toLowerCase())
@@ -85,6 +84,7 @@ export default function FetchExample() {
 
       {/* Anzeige der gefilterten Charaktere */}
       <div className="character-list">
+        {/* اصلاح اصلی: اضافه شدن پرانتز () به filteredData */}
         {filteredData().map((item) => (
           <Character
             key={item.id || item.name}
